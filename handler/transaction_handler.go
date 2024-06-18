@@ -14,6 +14,7 @@ func CreateTransaction(ctx *gin.Context) {
 	req := new(schemas.TransactionCreateRequest)
 	err := ctx.ShouldBind(req)
 	if err != nil {
+		logger.Debugf("%+v", err)
 		sendError(ctx, http.StatusBadRequest, err.Error())
 		return
 	}

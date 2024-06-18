@@ -23,7 +23,7 @@ func (s *TransactionService) Create(
 	}
 
 	// Check if transaction is valid
-	err = s.isValidTransaction(sender, receiver, transaction)
+	err = s.validateTransaction(sender, receiver, transaction)
 	if err != nil {
 		return nil, err
 	}
@@ -53,11 +53,13 @@ func (s *TransactionService) Create(
 		return nil, err
 	}
 
+	// Send notification and return the new transaction
+	go s.notificationService.SendNotification(newTransaction)
 	return newTransaction, nil
 }
 
-// isValidTransaction checks if the transaction is a valid transaction according to the business rules
-func (s *TransactionService) isValidTransaction(
+// validateTransaction checks if the transaction is a valid transaction according to the business rules
+func (s *TransactionService) validateTransaction(
 	sender *entity.User,
 	receiver *entity.User,
 	transaction *schemas.TransactionCreateRequest,

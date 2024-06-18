@@ -18,13 +18,3 @@ func (r *Repository) FindUserByID(id uint64) (*entity.User, error) {
 func (r *Repository) SaveUser(user *entity.User) error {
 	return r.db.Create(user).Error
 }
-
-// UpdateUser updates a user in the database
-func (r *Repository) UpdateUser(user *entity.User) error {
-	return r.db.Save(user).Error
-}
-
-// DeleteUser deletes a user from the database
-func (r *Repository) DeleteUser(user *entity.User) error {
-	return r.db.Delete(user).Error
-}

@@ -1,12 +1,7 @@
 package repository
 
 import (
-	"github.com/andrelopes-code/simple-picpay-golang/cfg"
 	"gorm.io/gorm"
-)
-
-var (
-	log = cfg.GetLogger("repository")
 )
 
 type Repository struct {

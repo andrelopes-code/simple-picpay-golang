@@ -22,16 +22,6 @@ func (r *Repository) SaveTransaction(transaction *entity.Transaction) error {
 	return r.db.Create(transaction).Error
 }
 
-// Update updates a transaction in the database
-func (r *Repository) UpdateTransaction(transaction *entity.Transaction) error {
-	return r.db.Save(transaction).Error
-}
-
-// Delete deletes a transaction from the database
-func (r *Repository) DeleteTransaction(transaction *entity.Transaction) error {
-	return r.db.Delete(transaction).Error
-}
-
 // TXSaveTransaction saves a transaction in the database atomically
 func (r *Repository) SaveTransactionAtomically(
 	transaction *entity.Transaction, sender *entity.User, receiver *entity.User,
