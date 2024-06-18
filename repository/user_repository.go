@@ -6,12 +6,12 @@ import (
 
 // FindUserByID returns a user by its ID
 func (r *Repository) FindUserByID(id uint64) (*entity.User, error) {
-	var user entity.User
-	err := r.db.First(&user, id).Error
+	user := &entity.User{}
+	err := r.db.First(user, id).Error
 	if err != nil {
 		return nil, err
 	}
-	return &user, nil
+	return user, nil
 }
 
 // CreateUser creates a new user in the database

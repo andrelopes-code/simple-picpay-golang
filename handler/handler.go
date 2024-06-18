@@ -12,6 +12,7 @@ var (
 
 func Init() {
 	logger = cfg.GetLogger("handler")
+	logger.Info("Initializing handler...")
 	db := cfg.GetDB()
 	transactionService = service.NewTransactionService(db)
 }

@@ -20,6 +20,7 @@ func CreateTransaction(ctx *gin.Context) {
 
 	newTransaction, err := transactionService.Create(req)
 	if err != nil {
+		// If an error occurs, it checks the type of error and sends an error message
 		switch err {
 		case errdefs.ErrRecordNotFound:
 			sendError(ctx, http.StatusNotFound, err.Error())
@@ -41,5 +42,6 @@ func CreateTransaction(ctx *gin.Context) {
 		return
 	}
 
+	// If no error occurs, it sends a success message with the created transaction
 	sendSuccess(ctx, http.StatusOK, "create-transaction", newTransaction)
 }

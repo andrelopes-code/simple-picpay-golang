@@ -1,9 +1,7 @@
 package schemas
 
-import "github.com/andrelopes-code/simple-picpay-golang/entity"
-
 type TransactionResponse struct {
-	entity.Transaction
+	ID uint64 `json:"id"`
 }
 
 type TransactionCreateRequest struct {

@@ -13,17 +13,18 @@ func initializeDatabase() (*gorm.DB, error) {
 	log.Info("Initializing database...")
 
 	dbPath := Settings.DBPath
+	dbFile := dbPath + "/" + Settings.DBName
 
-	_, err := os.Stat(dbPath)
+	_, err := os.Stat(dbFile)
 	if os.IsNotExist(err) {
 		log.Debug("Database not found, creating...")
 
-		err := os.MkdirAll("data", 0755)
+		err := os.MkdirAll(dbPath, 0755)
 		if err != nil {
 			return nil, err
 		}
 
-		file, err := os.Create(dbPath)
+		file, err := os.Create(dbFile)
 		if err != nil {
 			return nil, err
 		}
@@ -31,13 +32,13 @@ func initializeDatabase() (*gorm.DB, error) {
 	}
 
 	// Try connect to database
-	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open(dbFile), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
-
 	models := []any{
 		&entity.Transaction{},
+		&entity.User{},
 	}
 
 	// Auto migrate database with gorm

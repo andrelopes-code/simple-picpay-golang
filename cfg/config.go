@@ -1,7 +1,6 @@
 package cfg
 
 import (
-	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 )
 
@@ -12,15 +11,11 @@ var (
 )
 
 func Init() {
+	var err error
+
 	// Initialize Logger
 	logger = GetLogger("cfg")
 	logger.Info("Initializing config...")
-
-	// Load .env file
-	err := godotenv.Load(".env")
-	if err != nil {
-		logger.Fatal("Error loading .env file: " + err.Error())
-	}
 
 	// Initialize Settings
 	Settings = getSettings()
@@ -43,4 +38,8 @@ func GetLogger(prefix string) *Logger {
 // GetDB returns the database connection
 func GetDB() *gorm.DB {
 	return db
+}
+
+func SetDB(ndb *gorm.DB) {
+	db = ndb
 }
