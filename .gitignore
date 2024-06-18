@@ -49,3 +49,5 @@ go.work
 
 .env
 data
+temp
+tmp

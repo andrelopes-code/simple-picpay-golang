@@ -1,0 +1,14 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DB_PATH=.
+      - DB_NAME=/data.db
+      - AUTH_URL=https://util.devi.tools/api/v2/authorize
+      - NOTIFICATION_URL=https://run.mocky.io/v3/3157459b-602d-4ceb-bdaa-6e3ea5115ee6
+      - GIN_MODE=release
+    ports:
+      - "8080:8080"
+
