@@ -1,6 +1,7 @@
 package cfg
 
 import (
+	"github.com/andrelopes-code/simple-picpay-golang/utils"
 	"gorm.io/gorm"
 )
 
@@ -26,8 +27,7 @@ func Init() {
 		logger.Fatalf("Error initializing database: %s", err)
 	}
 
-	// !
-	setInitialTestData(db)
+	utils.SetInitialTestData(db)
 }
 
 // GetLogger returns a new logger with the given prefix

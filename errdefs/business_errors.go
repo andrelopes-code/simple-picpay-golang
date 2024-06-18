@@ -10,7 +10,7 @@ var (
 		"same user: sender and receiver cannot be the same",
 	)
 	ErrInvalidUser = errors.New(
-		"invalid user: ony individual users can transact",
+		"invalid user: merchants is not allowed to trasfer",
 	)
 	ErrTransactionUnauthorized = errors.New(
 		"unauthorized: transaction not authorized",
