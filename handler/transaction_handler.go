@@ -8,13 +8,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Summary Create Transaction
+// @Description Create a new transaction
+// @Tags transactions
+// @Accept json
+// @Produce json
+// @Param transaction body schemas.TransactionCreateRequest true "Transaction data"
+// @Success 201 {object} schemas.TransactionResponse
+// @Failure 400 {object} schemas.ErrorResponse
+// @Failure 404 {object} schemas.ErrorResponse
+// @Failure 403 {object} schemas.ErrorResponse
+// @Failure 500 {object} schemas.ErrorResponse
+// @Router /transaction [post]
 func CreateTransaction(ctx *gin.Context) {
 	// binds the req body to TransactionCreateRequest struct
 	// if a validation error occurs, it sends an error message
 	req := new(schemas.TransactionCreateRequest)
 	err := ctx.ShouldBind(req)
 	if err != nil {
-		logger.Debugf("%+v", err)
 		sendError(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
@@ -44,5 +55,5 @@ func CreateTransaction(ctx *gin.Context) {
 	}
 
 	// If no error occurs, it sends a success message with the created transaction
-	sendSuccess(ctx, http.StatusOK, "create-transaction", newTransaction)
+	sendSuccess(ctx, http.StatusCreated, "create-transaction", newTransaction)
 }

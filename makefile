@@ -1,4 +1,4 @@
-.PHONY: default run clean
+.PHONY: default run clean docs test
 # This will include the variables from the .env file
 # in the scope of the makefile, so they can be used by the make command
 ifeq (,$(wildcard .env))
@@ -8,9 +8,12 @@ include .env
 export $(shell sed 's/=.*//' .env)
 
 default:
-	@make run
+	@make air
 
 run:
+	@go run ./cmd
+
+air:
 	@air --build.cmd "go build -o tmp/api cmd/main.go" --build.bin "./tmp/api"
 
 clean:
@@ -20,3 +23,7 @@ clean:
 
 test:
 	@go test -v ./...
+
+
+docs:
+	@swag init -g cmd/main.go

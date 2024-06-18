@@ -1,0 +1,82 @@
+definitions:
+  schemas.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      detail:
+        type: string
+    type: object
+  schemas.TransactionCreateRequest:
+    properties:
+      receiver_id:
+        type: integer
+      sender_id:
+        type: integer
+      value_in_cents:
+        minimum: 1
+        type: integer
+    required:
+    - receiver_id
+    - sender_id
+    - value_in_cents
+    type: object
+  schemas.TransactionResponse:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      receiver_id:
+        type: integer
+      sender_id:
+        type: integer
+      updated_at:
+        type: string
+      value_in_cents:
+        type: integer
+    type: object
+info:
+  contact: {}
+  title: Simple PicPay API
+paths:
+  /transaction:
+    post:
+      consumes:
+      - application/json
+      description: Create a new transaction
+      parameters:
+      - description: Transaction data
+        in: body
+        name: transaction
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.TransactionCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/schemas.TransactionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/schemas.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/schemas.ErrorResponse'
+      summary: Create Transaction
+      tags:
+      - transactions
+swagger: "2.0"
