@@ -11,7 +11,7 @@ const (
 type User struct {
 	ID             uint64   `gorm:"primaryKey"  json:"id"`
 	FullName       string   `                   json:"fullName"`
-	DocumentID     string   `gorm:"uniqueIndex" json:"document_id"`
+	Document       string   `gorm:"uniqueIndex" json:"document"`
 	Email          string   `gorm:"uniqueIndex" json:"email"`
 	Password       string   `                   json:"password"`
 	Type           UserType `                   json:"type"`

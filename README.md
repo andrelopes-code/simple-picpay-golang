@@ -23,4 +23,14 @@ Ou então rodar o app utilizando o docker com o docker compose:
 docker compose up --build
 ```
 
+O banco tem 5 usuários inicializados ao subir a aplicação, são eles:
+```
+ ID | NAME | EMAIL   | USER TYPE     | BALANCE
+ 1  | John | j@a.com | common user   | 530
+ 2  | Jane | j@b.com | merchant user | 5000
+ 3  | Mary | m@c.com | merchant user | 10000
+ 4  | Mark | m@d.com | common user   | 2800
+ 5  | Mike | m@e.com | common user   | 10
+```
+
 Com a api rodando, acesse o swagger em: `http://localhost:8080/swagger/index.html`
